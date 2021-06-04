@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
@@ -41,11 +42,11 @@ public class StepDefinitions {
         waitTill = new WebDriverWait(driver,10);
         //throw new io.cucumber.java.PendingException();
     }
-    @When("I search for {string}")
-    public void i_search_for(String string) {
+    @When("I search for collection of {string}")
+    public void i_search_for_collection_of(String collectionInput) {
         // Write code here that turns the phrase above into concrete actions
         Utilities.clickElement(By.className("search-bar__input"),waitTill);
-        Utilities.clickElement(By.xpath("//ul[contains(@class,'search-bar__menu-linklist')]//a[@href='/collections/snacks']"),waitTill);
+        Utilities.clickElement(By.xpath("//ul[contains(@class,'search-bar__menu-linklist')]//a[@href='/collections/"+collectionInput+"']"),waitTill);
         try {
             Thread.sleep(1800);
         } catch (InterruptedException e) {
@@ -55,15 +56,37 @@ public class StepDefinitions {
 
         //throw new io.cucumber.java.PendingException();
     }
-    @Then("I should see all the products under the category of snacks")
-    public void i_should_see_all_the_products_under_the_category_of_snacks() {
+    @Then("I should see {string}")
+    public void i_should_see(String collectionResult) {
         // Write code here that turns the phrase above into concrete actions
 
         WebElement collectionHeading = driver.findElement(By.xpath("//h1[contains(@class,'collection__title')]"));
-        assertEquals(collectionHeading.getAttribute("innerHTML"),"Snacks");
+        assertEquals(collectionHeading.getAttribute("innerHTML"),collectionResult);
         driver.close();
         //throw new io.cucumber.java.PendingException();
     }
+
+    @When("I search for category of {string}")
+    public void i_search_for_category_of(String categoryInput) {
+        Select category = new Select(driver.findElement(By.id("search-product-type")));
+        category.selectByVisibleText(categoryInput);
+        Utilities.clickElement(By.className("search-bar__submit"), waitTill);
+        try {
+            Thread.sleep(1800);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+    }
+
+    @Then("I should see items for {string}")
+    public void i_should_see_items_for(String categoryResult) {
+        // Write code here that turns the phrase above into concrete actions
+        WebElement collectionHeading = driver.findElement(By.xpath("//h1[contains(@class,'collection__title')]"));
+        assertEquals(collectionHeading.getAttribute("innerHTML"),"Products for \"" + categoryResult + "\"");
+    }
+
 
 
 }
