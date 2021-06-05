@@ -28,6 +28,7 @@ public class Utilities {
     }
     @After
     public void tearDown(){
+
         driver.quit();
     }
 
