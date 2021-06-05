@@ -7,13 +7,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import static com.rashmi.cucumber.Utilities.clickElement;
-import static com.rashmi.cucumber.Utilities.driver;
+import static com.rashmi.cucumber.GenericHook.driver;
 import static org.junit.Assert.assertEquals;
 
 
 public class CheckoutStepDefinitions {
 
-    public static WebDriverWait waitTill = new WebDriverWait(Utilities.driver,10);
+    public static WebDriverWait waitTill = new WebDriverWait(driver,10);
 
     @When("I add products to the cart")
     public void i_add_products_to_the_cart() {
@@ -36,7 +36,6 @@ public class CheckoutStepDefinitions {
     public void iShouldBeTakenToThePaymentPage() {
     boolean shippingAddressPresent = driver.findElement(By.xpath("//div[@class = 'section section--shipping-address']")).isDisplayed();
     assertEquals(shippingAddressPresent,true);
-
 
     }
 }

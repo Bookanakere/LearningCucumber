@@ -12,7 +12,7 @@ import static com.rashmi.cucumber.Utilities.clickElement;
 
 public class SearchStepDefinitions {
 
-    WebDriverWait waitTill = new WebDriverWait(Utilities.driver,10);
+    WebDriverWait waitTill = new WebDriverWait(GenericHook.driver,10);
 
     @When("I search for collection of {string}")
     public void i_search_for_collection_of(String collectionInput) {
@@ -30,15 +30,15 @@ public class SearchStepDefinitions {
     @Then("I should see {string}")
     public void i_should_see(String collectionResult) {
 
-        WebElement collectionHeading = Utilities.driver.findElement(By.xpath("//h1[contains(@class,'collection__title')]"));
+        WebElement collectionHeading = GenericHook.driver.findElement(By.xpath("//h1[contains(@class,'collection__title')]"));
         assertEquals(collectionHeading.getAttribute("innerHTML"),collectionResult);
-        Utilities.driver.close();
+        GenericHook.driver.close();
 
     }
 
     @When("I search for category of {string}")
     public void i_search_for_category_of(String categoryInput) {
-        Select category = new Select(Utilities.driver.findElement(By.id("search-product-type")));
+        Select category = new Select(GenericHook.driver.findElement(By.id("search-product-type")));
         category.selectByVisibleText(categoryInput);
         Utilities.clickElement(By.className("search-bar__submit"), waitTill);
         try {
@@ -52,9 +52,9 @@ public class SearchStepDefinitions {
 
     @Then("I should see items for {string}")
     public void i_should_see_items_for(String categoryResult) {
-        WebElement collectionHeading = Utilities.driver.findElement(By.xpath("//h1[contains(@class,'collection__title')]"));
+        WebElement collectionHeading = GenericHook.driver.findElement(By.xpath("//h1[contains(@class,'collection__title')]"));
         assertEquals(collectionHeading.getAttribute("innerHTML"),"Products for \"" + categoryResult + "\"");
-        Utilities.driver.close();
+        GenericHook.driver.close();
     }
 
 
