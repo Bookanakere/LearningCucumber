@@ -4,16 +4,22 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import static com.rashmi.cucumber.Utilities.clickElement;
-import static com.rashmi.cucumber.GenericHook.driver;
 import static org.junit.Assert.assertEquals;
 
 
 public class CheckoutStepDefinitions {
 
-    public static WebDriverWait waitTill = new WebDriverWait(driver,10);
+    private WebDriver driver;
+    private WebDriverWait waitTill;
+
+    public CheckoutStepDefinitions(GenericHook genericHook){
+        this.driver = genericHook.getDriver();
+        this.waitTill = genericHook.getWebDriverWait();
+    }
 
     @When("I add products to the cart")
     public void i_add_products_to_the_cart() {

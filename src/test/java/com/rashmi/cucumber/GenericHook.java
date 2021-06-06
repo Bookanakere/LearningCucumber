@@ -6,12 +6,15 @@ import io.cucumber.java.en.Given;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
 public class GenericHook {
     private static final String baseUrl = "https://desidutchstore.nl/";
-    public static WebDriver driver;
+    private WebDriver driver;
+    private WebDriverWait waitTill;
+
 
     @Before
     public void initDriver() {
@@ -21,6 +24,7 @@ public class GenericHook {
         options.addArguments("--disable-notifications");
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        waitTill = new WebDriverWait(driver,10);
     }
     @After
     public void tearDown(){
@@ -36,4 +40,11 @@ public class GenericHook {
 
     }
 
+    public WebDriver getDriver() {
+        return driver;
+    }
+
+    public WebDriverWait getWebDriverWait(){
+        return waitTill;
+    }
 }
