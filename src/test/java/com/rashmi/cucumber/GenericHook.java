@@ -20,11 +20,16 @@ public class GenericHook {
     public void initDriver() {
         System.setProperty("webdriver.chrome.driver", "chromedriver");
         driver = new ChromeDriver();
+
+        driver.manage().window().maximize();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications");
-        driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
         waitTill = new WebDriverWait(driver,10);
+
+        driver.get(baseUrl);
+
     }
     @After
     public void tearDown(){
@@ -34,9 +39,6 @@ public class GenericHook {
 
     @Given("I am on the homepage of the desidutchstore")
     public void i_am_on_the_homepage_of_the_desidutchstore() {
-
-        driver.get(baseUrl);
-        driver.manage().window().maximize();
 
     }
 
