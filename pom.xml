@@ -71,6 +71,9 @@
                 <configuration>
                     <parallel>methods</parallel>
                     <useUnlimitedThreads>true</useUnlimitedThreads>
+                    <systemPropertyVariables>
+                        <rashmi.environment>dev</rashmi.environment>
+                    </systemPropertyVariables>
                 </configuration>
             </plugin>
         </plugins>

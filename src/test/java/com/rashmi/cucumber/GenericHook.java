@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.concurrent.TimeUnit;
 
 public class GenericHook {
-    private static final String baseUrl = "https://desidutchstore.nl/";
+    private static String baseUrl;
     private WebDriver driver;
     private WebDriverWait waitTill;
 
@@ -28,6 +28,8 @@ public class GenericHook {
 
         waitTill = new WebDriverWait(driver,10);
 
+        Config config = new Config();
+        baseUrl = config.getBaseUrl();
         driver.get(baseUrl);
 
     }
