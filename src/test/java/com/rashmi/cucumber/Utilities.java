@@ -14,4 +14,11 @@ public class Utilities {
         element.click();
     }
 
+
+    /*
+    public void codeReference(){
+        List<WebElement> webElements = driver.findElements(By.xpath("//ul[contains(@class, 'search-bar__menu-linklist']"));
+        webElements.forEach(webElement -> { System.out.println(webElement.getAttribute("innerHTML"));
+      }
+*/
 }
