@@ -16,9 +16,19 @@ public class Utilities {
 
 
     /*
-    public void codeReference(){
-        List<WebElement> webElements = driver.findElements(By.xpath("//ul[contains(@class, 'search-bar__menu-linklist']"));
-        webElements.forEach(webElement -> { System.out.println(webElement.getAttribute("innerHTML"));
-      }
+       List<WebElement> collections = driver.findElements(By.xpath("//a[@class='search-bar__menu-link']"));
+       System.out.println(collections.size());
+       collections.forEach(collection -> {
+         System.out.println(collection.getAttribute("innerHTML"));
+       });
+
+               WebElement selectCategory =driver.findElement(By.id("search-product-type"));
+        Select select = new Select(selectCategory);
+        select.selectByVisibleText("Chapati");
+
+                WebElement collections = driver.findElement(By.xpath("//a[@class='search-bar__menu-link']"));
+        WebElement pickles = collections.findElement(By.xpath("//a[contains(text(),'Pickles')]"));
+        clickElement(By.className("search-bar__input"),waitTill);
+        pickles.click();
 */
 }
