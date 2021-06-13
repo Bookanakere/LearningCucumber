@@ -1,17 +1,16 @@
 package com.rashmi.cucumber;
 
+import com.rashmi.pages.InformationPage;
+import com.rashmi.pages.ProductPage;
+import com.rashmi.pages.SearchPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.List;
-
-import static com.rashmi.cucumber.Utilities.clickElement;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -19,37 +18,32 @@ import static org.junit.Assert.assertTrue;
 public class CheckoutStepDefinitions {
 
     private WebDriver driver;
+    private SearchPage searchPage;
     private WebDriverWait waitTill;
+    private ProductPage productPage;
+    private InformationPage informationPage;
 
     public CheckoutStepDefinitions(GenericHook genericHook){
         this.driver = genericHook.getDriver();
         this.waitTill = genericHook.getWebDriverWait();
+        searchPage = new SearchPage(driver);
+        productPage = new ProductPage(driver);
+        informationPage = new InformationPage(driver);
     }
-
-    @When("I add {string}, {string} to the cart")
-    public void iAddToTheCart(String collectionInput, String productInput) {
-        clickElement(By.className("search-bar__input"),waitTill);
-        clickElement(By.xpath("//ul[contains(@class,'search-bar__menu-linklist')]//a[@href='/collections/"+collectionInput+"']"),waitTill);
-        WebElement someElement = driver.findElement(By.xpath("//a[@href='/collections/frozen-food/products/haldiram-s-aloo-paratha']"));
-        WebElement newElement = someElement.findElement(By.xpath(".."));
-        System.out.println(newElement.getAttribute("id"));
-    }
-
     @Given("I am on the {string} section")
-    public void iAmOnTheSection(String sectionInput) {
-        clickElement(By.className("search-bar__input"),waitTill);
-        clickElement(By.xpath("//ul[contains(@class, 'search-bar__menu-linklist')]//a[contains(text(),'"+sectionInput+"')]"), waitTill);
+    public void iAmOnTheSection(String collectionInput) {
+        searchPage.searchCollection(collectionInput);
     }
 
     @When("I add {string} to the cart")
     public void iAddToTheCart(String productInput) {
-        clickElement(By.xpath("//a[contains(text(),'"+productInput+"')]//./..//./..//form[@action = '/cart/add']"), waitTill);
+        productPage.addToCart(productInput);
     }
 
     @And("checkout")
     public void checkout() {
-        clickElement(By.xpath("//a[@href = '/cart']"), waitTill);
-        clickElement(By.xpath("//button[@name = 'checkout']"), waitTill);
+        productPage.goToCart();
+        productPage.checkout();
     }
 
     @Then("I should be taken to the payment page")
@@ -58,4 +52,8 @@ public class CheckoutStepDefinitions {
         assertTrue(shippingAddressPresent);
     }
 
+    @Then("I should be taken to the information page")
+    public void iShouldBeTakenToTheInformationPage() {
+        assertEquals("Information - DesiDutchStore - Checkout", informationPage.getInformationPageTitle());
+    }
 }

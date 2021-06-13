@@ -1,5 +1,6 @@
 package com.rashmi.cucumber;
 
+import com.rashmi.cucumber.Config;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;

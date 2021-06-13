@@ -3,10 +3,10 @@ Feature: Search
 
   Scenario: Search by collection
     Given I am on the homepage of the desidutchstore
-    When I search for collection of "vegetables"
-    Then I should see "Vegetables"
+    When I search for collection of "Pickles"
+    Then I should see "Pickles"
 
   Scenario: Search by category
     Given I am on the homepage of the desidutchstore
-    When I search for category of "Vegetable"
-    Then I should see items for "Vegetable"
+    When I search for category of "Lentils"
+    Then I should see items for "Lentils"

@@ -72,7 +72,7 @@
                     <parallel>methods</parallel>
                     <useUnlimitedThreads>true</useUnlimitedThreads>
                     <systemPropertyVariables>
-                        <rashmi.environment>dev</rashmi.environment>
+                        <rashmi.environment>test</rashmi.environment>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
